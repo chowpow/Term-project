@@ -10,7 +10,6 @@ public class Main {
         scanner = new Scanner(System.in);
         fantasyTeam = new Team();
         fantasyTeam.makeTeam();
-
         processFantasyTeam();
     }
 
@@ -70,14 +69,12 @@ public class Main {
         fantasyTeam.addPlayer(playerToBeAdded);
     }
 
-
     private void removePlayer() {
     }
 
     private void viewTeam() {
         System.out.println(fantasyTeam.allPlayerNames());
     }
-
 
     public static void main(String[] args) {
         new Main();

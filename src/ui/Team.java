@@ -6,7 +6,6 @@ public class Team {
 
     public void makeTeam() {
         squad = new ArrayList<Player>();
-
     }
 
     public void addPlayer(Player player) {
