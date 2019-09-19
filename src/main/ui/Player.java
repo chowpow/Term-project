@@ -42,6 +42,4 @@ public class Player {
         points = 4 * this.goals + 3 * this.assists;
         return points;
     }
-
-
 }

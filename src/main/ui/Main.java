@@ -6,6 +6,7 @@ public class Main {
     private Team fantasyTeam;
 
 
+    // comment
     public Main() {
         scanner = new Scanner(System.in);
         fantasyTeam = new Team();
