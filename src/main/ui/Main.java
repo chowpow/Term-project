@@ -40,7 +40,7 @@ public class Main {
             addPlayerToTeam();
         }
         if (function.equals("2")) {
-            removePlayer();
+            fantasyTeam.removePlayer(removePlayer());
         }
         if (function.equals("3")) {
             viewTeam();
@@ -75,16 +75,17 @@ public class Main {
         fantasyTeam.addPlayer(playerToBeAdded);
     }
 
-    private void removePlayer() {
+    private Player removePlayer() {
         String playerToBeRemoved;
 
         System.out.println("Enter the name of the player you would like to remove");
         playerToBeRemoved = scanner.nextLine();
         for (Player player : fantasyTeam.getSquad()) {
             if (player.getPlayerName().equals(playerToBeRemoved)) {
-                fantasyTeam.removePlayer(player);
+                return player;
             }
         }
+        return null;
     }
 
     private void viewTeam() {

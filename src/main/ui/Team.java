@@ -17,7 +17,6 @@ public class Team {
     }
 
     public void removePlayer(Player player) {
-
         squad.remove(player);
     }
 
