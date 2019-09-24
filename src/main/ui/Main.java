@@ -1,10 +1,8 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Main {
     private Scanner scanner;
     private Team fantasyTeam;
-
 
     // comment
     public Main() {
@@ -15,28 +13,31 @@ public class Main {
     }
 
     private void processFantasyTeam() {
-
-        String function = "";
-        Team yourTeam = new Team();
+        String function = null;
 
         while (true) {
-            System.out.println("Please pick an option: [1] to add player to your team"
-                    + " [2] to remove a player from your team"
-                    + " [3] to see your team"
-                    + " [4] to quit");
+            printUserInput();
             function = scanner.nextLine();
             System.out.println("You selected: " + function);
 
-            if (function.equals("4")) {
+            if (function.equals("5")) {
                 break;
             }
             processUserOperation(function);
         }
     }
 
+    private void printUserInput() {
+        System.out.println("Please pick an option: [1] to add player to your team"
+                + " [2] to remove a player from your team"
+                + " [3] to see your team"
+                + " [4] to see how many points your team got"
+                + " [5] to quit");
+    }
+
     private void processUserOperation(String function) {
         if (function.equals("1")) {
-            addPlayer();
+            addPlayerToTeam();
         }
         if (function.equals("2")) {
             removePlayer();
@@ -44,9 +45,12 @@ public class Main {
         if (function.equals("3")) {
             viewTeam();
         }
+        if (function.equals("4")) {
+            viewTeamPoints();
+        }
     }
 
-    private void addPlayer() {
+    private void addPlayerToTeam() {
         String playerName;
         String position;
         int goals;
@@ -67,21 +71,31 @@ public class Main {
         scanner.nextLine();
 
         playerToBeAdded.makeplayer(playerName,position,goals,assists);
+        System.out.println("You've added " + playerName + " to your team");
         fantasyTeam.addPlayer(playerToBeAdded);
     }
 
     private void removePlayer() {
+        String playerToBeRemoved;
+
+        System.out.println("Enter the name of the player you would like to remove");
+        playerToBeRemoved = scanner.nextLine();
+        for (Player player : fantasyTeam.getSquad()) {
+            if (player.getPlayerName().equals(playerToBeRemoved)) {
+                fantasyTeam.removePlayer(player);
+            }
+        }
     }
 
     private void viewTeam() {
         System.out.println(fantasyTeam.allPlayerNames());
     }
 
+    private void viewTeamPoints() {
+        System.out.println(fantasyTeam.calculateTeamPoints());
+    }
+
     public static void main(String[] args) {
         new Main();
     }
-
-
-
-
 }

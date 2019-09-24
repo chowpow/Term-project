@@ -13,15 +13,6 @@ public class Player {
         points = 0;
     }
 
-    public void playerScore(String playerName, String position, int goals, int assists) {
-        this.playerName = playerName;
-        this.position = position;
-        this.goals = goals;
-        this.assists = assists;
-        points = calculatePoints();
-        System.out.println(playerName + " scored" + points + " this week!");
-    }
-
     public String getPlayerName() {
         return this.playerName;
     }
@@ -39,7 +30,13 @@ public class Player {
     }
 
     public int calculatePoints() {
-        points = 4 * this.goals + 3 * this.assists;
+        if (position.equals("forward")) {
+            points = (4 * goals) + (3 * assists);
+        } else if (position.equals("midfield")) {
+            points = (5 * goals) + (3 * assists);
+        } else {
+            points = (6 * goals) + (3 * assists);
+        }
         return points;
     }
 }
