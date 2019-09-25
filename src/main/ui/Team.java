@@ -1,3 +1,5 @@
+package ui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,16 @@ public class Team {
     // EFFECTS: removes a player from the team
     public void removePlayer(Player player) {
         squad.remove(player);
+    }
+
+    // EFFECTS: returns the player that matches the name of what the user entered
+    public Player findPlayerWithName(String playerToBeRemoved) {
+        for (Player player : squad) {
+            if (player.getPlayerName().equals(playerToBeRemoved)) {
+                return player;
+            }
+        }
+        return null;
     }
 
     // EFFECTS: returns the names of all players in the team

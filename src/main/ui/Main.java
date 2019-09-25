@@ -1,3 +1,5 @@
+package ui;
+
 import java.util.Scanner;
 
 public class Main {
@@ -75,21 +77,11 @@ public class Main {
         fantasyTeam.addPlayer(playerToBeAdded);
     }
 
-    private Player playerToBeRemoved() {
+    private void removePlayer() {
         String playerToBeRemoved;
-
         System.out.println("Enter the name of the player you would like to remove");
         playerToBeRemoved = scanner.nextLine();
-        for (Player player : fantasyTeam.getSquad()) {
-            if (player.getPlayerName().equals(playerToBeRemoved)) {
-                return player;
-            }
-        }
-        return null;
-    }
-
-    private void removePlayer() {
-        fantasyTeam.removePlayer(playerToBeRemoved());
+        fantasyTeam.removePlayer(fantasyTeam.findPlayerWithName(playerToBeRemoved));
     }
 
     private void viewTeam() {

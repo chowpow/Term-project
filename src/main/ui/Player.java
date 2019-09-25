@@ -1,3 +1,5 @@
+package ui;
+
 public class Player {
     private String playerName;
     private String position;
@@ -37,7 +39,7 @@ public class Player {
     public int calculatePoints() {
         if (position.equals("forward")) {
             points = (4 * goals) + (3 * assists);
-        } else if (position.equals("midfield")) {
+        } else if (position.equals("midfielder")) {
             points = (5 * goals) + (3 * assists);
         } else {
             points = (6 * goals) + (3 * assists);
