@@ -5,30 +5,35 @@ public class Player {
     private int assists;
     private int points;
 
-    public void makeplayer(String playerName, String position, int goals, int assists) {
+    public void makePlayer(String playerName, String position, int goals, int assists) {
         this.playerName = playerName;
         this.position = position;
         this.goals = goals;
         this.assists = assists;
         points = 0;
     }
-
+    // EFFECTS: returns the player's name
     public String getPlayerName() {
-        return this.playerName;
+        return playerName;
     }
 
+    // EFFECTS: returns the player's position
     public String getPosition() {
         return this.position;
     }
 
+    // EFFECTS: returns how many goals the player scored
     public int getGoals() {
         return this.goals;
     }
 
+    // EFFECTS: returns how many assists the player got
     public int getAssists() {
         return this.assists;
     }
 
+    // MODIFIES: this
+    // EFFECTS: returns how many points a player got
     public int calculatePoints() {
         if (position.equals("forward")) {
             points = (4 * goals) + (3 * assists);
