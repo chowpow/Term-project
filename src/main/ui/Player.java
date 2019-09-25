@@ -14,6 +14,7 @@ public class Player {
         this.assists = assists;
         points = 0;
     }
+
     // EFFECTS: returns the player's name
     public String getPlayerName() {
         return playerName;
