@@ -7,7 +7,7 @@ public class Player {
     private int assists;
     private int points;
 
-    public void makePlayer(String playerName, String position, int goals, int assists) {
+    Player(String playerName, String position, int goals, int assists) {
         this.playerName = playerName;
         this.position = position;
         this.goals = goals;

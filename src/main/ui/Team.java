@@ -7,7 +7,7 @@ public class Team {
     private List<Player> squad;
     private int teamPoints;
 
-    public void makeTeam() {
+    Team() {
         squad = new ArrayList<>();
         teamPoints = 0;
     }

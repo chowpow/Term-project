@@ -9,33 +9,39 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TeamTest {
-    Team team1 = new Team();
-    Team team2 = new Team();
-    Team team3 = new Team();
+    Team team1;
+    Team team2;
+    Team team3;
     Team team4 = new Team();
     Team team5 = new Team();
 
-    Player player1 = new Player();
-    Player player2 = new Player();
-    Player player3 = new Player();
-    Player player4 = new Player();
+    Player player1;
+    Player player2;
+    Player player3;
+    Player player4;
 
-    ArrayList<Player> playerList = new ArrayList<Player>();
-    ArrayList<Player> playerList1 = new ArrayList<Player>();
-    ArrayList<String> playerNameList = new ArrayList<String>();
+    ArrayList<Player> playerList;
+    ArrayList<Player> playerList1;
+    ArrayList<String> playerNameList;
 
-    int teamScore = 0;
+    int teamScore;
 
     @BeforeEach
     void runBefore() {
-        player1.makePlayer("Mo Salah", "forward",2,2);
-        player2.makePlayer("Paul Pogba","midfielder",1,1);
-        player3.makePlayer("Virgil van Dijk","defender",1,0);
-        player4.makePlayer("David de Gea","goalkeeper",0,0);
+        player1 = new Player("Mo Salah", "forward",2,2);
+        player2 = new Player("Paul Pogba","midfielder",1,1);
+        player3 = new Player("Virgil van Dijk","defender",1,0);
+        player4 = new Player("David de Gea","goalkeeper",0,0);
 
-        team1.makeTeam();
-        team2.makeTeam();
-        team3.makeTeam();
+        team1 = new Team();
+        team2 = new Team();
+        team3 = new Team();
+
+        playerList = new ArrayList<Player>();
+        playerList1 = new ArrayList<Player>();
+        playerNameList = new ArrayList<String>();
+
+        teamScore = 0;
     }
 
     @Test
@@ -80,6 +86,7 @@ class TeamTest {
     void testRemovePlayer() {
         team1.removePlayer(player1);
         assertTrue(team1.getSquad().isEmpty());
+
         team2.addPlayer(player1);
         team2.addPlayer(player2);
         team2.removePlayer(player1);

@@ -10,7 +10,6 @@ public class Main {
     public Main() {
         scanner = new Scanner(System.in);
         fantasyTeam = new Team();
-        fantasyTeam.makeTeam();
         processFantasyTeam();
     }
 
@@ -57,7 +56,7 @@ public class Main {
         String position;
         int goals;
         int assists;
-        Player playerToBeAdded = new Player();
+
 
         System.out.println("Please enter the player's name");
         playerName = scanner.nextLine();
@@ -71,8 +70,7 @@ public class Main {
         System.out.println("Please enter how many assists the player had this gameweek");
         assists = scanner.nextInt();
         scanner.nextLine();
-
-        playerToBeAdded.makePlayer(playerName,position,goals,assists);
+        Player playerToBeAdded = new Player(playerName,position,goals,assists);
         System.out.println("You've added " + playerName + " to your team");
         fantasyTeam.addPlayer(playerToBeAdded);
     }
