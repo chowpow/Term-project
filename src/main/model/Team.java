@@ -11,7 +11,7 @@ public class Team {
 
     public Team() {
         squad = new ArrayList<>();
-        teamPoints = 0;
+
     }
 
     // EFFECTS: returns all the players in the team
@@ -28,6 +28,7 @@ public class Team {
     // MODIFIES: this
     // EFFECTS: removes a player from the team
     public void removePlayer(Player player) {
+        teamPoints = teamPoints - player.calculatePoints();
         squad.remove(player);
     }
 
@@ -53,6 +54,7 @@ public class Team {
     // MODIFIES: this
     // EFFECTS: returns the total points in a team
     public int calculateTeamPoints() {
+        teamPoints = 0;
         for (Player player : squad) {
             teamPoints = teamPoints + player.calculatePoints();
         }

@@ -59,7 +59,6 @@ public class FantasyTeam {
         int goals;
         int assists;
 
-
         System.out.println("Please enter the player's name");
         playerName = scanner.nextLine();
 
@@ -81,6 +80,7 @@ public class FantasyTeam {
         String playerToBeRemoved;
         System.out.println("Enter the name of the player you would like to remove");
         playerToBeRemoved = scanner.nextLine();
+        System.out.println("You've removed " + playerToBeRemoved + " from your team");
         fantasyTeam.removePlayer(fantasyTeam.findPlayerWithName(playerToBeRemoved));
     }
 

@@ -14,8 +14,6 @@ class TeamTest {
     Team team1;
     Team team2;
     Team team3;
-    Team team4 = new Team();
-    Team team5 = new Team();
 
     Player player1;
     Player player2;
