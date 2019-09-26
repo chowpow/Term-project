@@ -1,4 +1,6 @@
-package ui;
+package model;
+
+import model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,7 @@ public class Team {
     private List<Player> squad;
     private int teamPoints;
 
-    Team() {
+    public Team() {
         squad = new ArrayList<>();
         teamPoints = 0;
     }

@@ -1,5 +1,7 @@
 package ui;
 
+import model.Player;
+import model.Team;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package ui;
+package model;
 
 public class Player {
     private String playerName;
@@ -7,7 +7,7 @@ public class Player {
     private int assists;
     private int points;
 
-    Player(String playerName, String position, int goals, int assists) {
+    public Player(String playerName, String position, int goals, int assists) {
         this.playerName = playerName;
         this.position = position;
         this.goals = goals;
