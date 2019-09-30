@@ -4,5 +4,5 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface Loadable {
-    void load() throws IOException, ClassNotFoundException;
+    Team load() throws IOException, ClassNotFoundException;
 }

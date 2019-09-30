@@ -26,6 +26,7 @@ class FantasyTeamTest {
 
     Team testTeam;
     Team testTeam1;
+    Team clearSave;
     Team team1;
     Team team2;
     Team team3;
@@ -50,21 +51,21 @@ class FantasyTeamTest {
         team2.addPlayer(player2);
         team2.addPlayer(player3);
         team2.addPlayer(player4);
+
+        clearSave = new Team();
     }
 
+
     @Test
-    void testSave() throws IOException, ClassNotFoundException {
+    void testLoadAndSave() throws IOException, ClassNotFoundException {
         testFantasyTeam.save(team1);
-        ObjectInputStream testLoad = new ObjectInputStream(new FileInputStream("Save.txt"));
-        testTeam = (Team) testLoad.readObject();
+        testTeam = testFantasyTeam.load();
         assertEquals(team1.allPlayerNames(),testTeam.allPlayerNames());
 
         testFantasyTeam.save(team2);
-        ObjectInputStream testLoad1 = new ObjectInputStream(new FileInputStream("Save.txt"));
-        testTeam1 = (Team) testLoad1.readObject();
+        testTeam1 = testFantasyTeam.load();
         assertEquals(team2.allPlayerNames(),testTeam1.allPlayerNames());
 
-
-
+        testFantasyTeam.save(clearSave);
     }
 }

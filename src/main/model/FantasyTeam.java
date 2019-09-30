@@ -13,7 +13,7 @@ public class FantasyTeam implements Saveable, Loadable {
     }
 
     public void runFantasyTeam() throws IOException, ClassNotFoundException {
-        load();
+        fantasyTeam = load();
         processFantasyTeam();
     }
 
@@ -96,19 +96,19 @@ public class FantasyTeam implements Saveable, Loadable {
     }
 
     @Override
-    public void save(Team team1) throws IOException {
+    public void save(Team team) throws IOException {
         ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("Save.txt"));
-        save.writeObject(team1);
+        save.writeObject(team);
         save.close();
 
     }
 
     @Override
-    public void load() throws IOException, ClassNotFoundException {
+    public Team load() throws IOException, ClassNotFoundException {
         ObjectInputStream load = new ObjectInputStream(new FileInputStream("Save.txt"));
-        fantasyTeam = (Team) load.readObject();
-        load.close();
+        Team team;
+        team = (Team) load.readObject();
+        return team;
     }
-
 
 }
