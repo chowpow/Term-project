@@ -13,9 +13,7 @@ public class FantasyTeam implements Saveable, Loadable {
     }
 
     public void runFantasyTeam() throws IOException, ClassNotFoundException {
-        if (!(fantasyTeam.getSquad().isEmpty())) {
-            load();
-        }
+        load();
         processFantasyTeam();
     }
 
@@ -28,7 +26,7 @@ public class FantasyTeam implements Saveable, Loadable {
             System.out.println("You selected: " + function);
 
             if (function.equals("5")) {
-                save();
+                save(fantasyTeam);
                 break;
             }
             processUserOperation(function);
@@ -98,9 +96,10 @@ public class FantasyTeam implements Saveable, Loadable {
     }
 
     @Override
-    public void save() throws IOException {
+    public void save(Team team1) throws IOException {
         ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("Save.txt"));
-        save.writeObject(fantasyTeam);
+        save.writeObject(team1);
+        save.close();
 
     }
 
@@ -108,6 +107,7 @@ public class FantasyTeam implements Saveable, Loadable {
     public void load() throws IOException, ClassNotFoundException {
         ObjectInputStream load = new ObjectInputStream(new FileInputStream("Save.txt"));
         fantasyTeam = (Team) load.readObject();
+        load.close();
     }
 
 
