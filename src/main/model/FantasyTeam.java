@@ -1,8 +1,9 @@
 package model;
 
+import java.io.*;
 import java.util.Scanner;
 
-public class FantasyTeam {
+public class FantasyTeam implements Saveable, Loadable {
     private Scanner scanner;
     private Team fantasyTeam;
 
@@ -11,11 +12,14 @@ public class FantasyTeam {
         fantasyTeam = new Team();
     }
 
-    public void runFantasyTeam() {
+    public void runFantasyTeam() throws IOException, ClassNotFoundException {
+        if (!(fantasyTeam.getSquad().isEmpty())) {
+            load();
+        }
         processFantasyTeam();
     }
 
-    private void processFantasyTeam() {
+    private void processFantasyTeam() throws IOException {
         String function = null;
 
         while (true) {
@@ -24,6 +28,7 @@ public class FantasyTeam {
             System.out.println("You selected: " + function);
 
             if (function.equals("5")) {
+                save();
                 break;
             }
             processUserOperation(function);
@@ -89,6 +94,21 @@ public class FantasyTeam {
     }
 
     private void viewTeamPoints() {
-        System.out.println(fantasyTeam.calculateTeamPoints());
+        System.out.println("Your team got " + fantasyTeam.calculateTeamPoints() + " points!");
     }
+
+    @Override
+    public void save() throws IOException {
+        ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("Save.txt"));
+        save.writeObject(fantasyTeam);
+
+    }
+
+    @Override
+    public void load() throws IOException, ClassNotFoundException {
+        ObjectInputStream load = new ObjectInputStream(new FileInputStream("Save.txt"));
+        fantasyTeam = (Team) load.readObject();
+    }
+
+
 }

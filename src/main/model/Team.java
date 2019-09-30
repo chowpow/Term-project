@@ -2,16 +2,16 @@ package model;
 
 import model.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Team {
+public class Team implements Serializable {
     private List<Player> squad;
     private int teamPoints;
 
     public Team() {
         squad = new ArrayList<>();
-
     }
 
     // EFFECTS: returns all the players in the team
@@ -28,7 +28,6 @@ public class Team {
     // MODIFIES: this
     // EFFECTS: removes a player from the team
     public void removePlayer(Player player) {
-        teamPoints = teamPoints - player.calculatePoints();
         squad.remove(player);
     }
 
@@ -56,7 +55,7 @@ public class Team {
     public int calculateTeamPoints() {
         teamPoints = 0;
         for (Player player : squad) {
-            teamPoints = teamPoints + player.calculatePoints();
+            teamPoints += player.calculatePoints();
         }
         return teamPoints;
     }
