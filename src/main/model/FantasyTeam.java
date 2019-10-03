@@ -13,11 +13,10 @@ public class FantasyTeam implements Saveable, Loadable {
     }
 
     public void runFantasyTeam() throws IOException, ClassNotFoundException {
-        fantasyTeam = load();
         processFantasyTeam();
     }
 
-    private void processFantasyTeam() throws IOException {
+    private void processFantasyTeam() throws IOException, ClassNotFoundException {
         String function = null;
 
         while (true) {
@@ -38,10 +37,11 @@ public class FantasyTeam implements Saveable, Loadable {
                 + " [2] to remove a player from your team"
                 + " [3] to see your team"
                 + " [4] to see how many points your team got"
-                + " [5] to quit");
+                + " [5] to quit"
+                + " [6] to load previous save");
     }
 
-    private void processUserOperation(String function) {
+    private void processUserOperation(String function) throws IOException, ClassNotFoundException {
         if (function.equals("1")) {
             addPlayerToTeam();
         }
@@ -53,6 +53,9 @@ public class FantasyTeam implements Saveable, Loadable {
         }
         if (function.equals("4")) {
             viewTeamPoints();
+        }
+        if (function.equals("6")) {
+            fantasyTeam = load();
         }
     }
 

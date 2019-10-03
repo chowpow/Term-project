@@ -7,12 +7,7 @@ import model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,14 +19,11 @@ class FantasyTeamTest {
     Player player3;
     Player player4;
 
-    Team testTeam;
     Team testTeam1;
+    Team testTeam2;
     Team clearSave;
     Team team1;
     Team team2;
-    Team team3;
-
-
 
     @BeforeEach
     void runBefore() {
@@ -42,10 +34,8 @@ class FantasyTeamTest {
 
         team1 = new Team();
         team2 = new Team();
-        team3 = new Team();
 
         team1.addPlayer(player1);
-        team1.addPlayer(player2);
 
         team2.addPlayer(player1);
         team2.addPlayer(player2);
@@ -59,12 +49,12 @@ class FantasyTeamTest {
     @Test
     void testLoadAndSave() throws IOException, ClassNotFoundException {
         testFantasyTeam.save(team1);
-        testTeam = testFantasyTeam.load();
-        assertEquals(team1.allPlayerNames(),testTeam.allPlayerNames());
+        testTeam1 = testFantasyTeam.load();
+        assertEquals(team1.allPlayerNames(), testTeam1.allPlayerNames());
 
         testFantasyTeam.save(team2);
-        testTeam1 = testFantasyTeam.load();
-        assertEquals(team2.allPlayerNames(),testTeam1.allPlayerNames());
+        testTeam2 = testFantasyTeam.load();
+        assertEquals(team2.allPlayerNames(), testTeam2.allPlayerNames());
 
         testFantasyTeam.save(clearSave);
     }
