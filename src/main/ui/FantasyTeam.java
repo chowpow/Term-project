@@ -1,9 +1,6 @@
 package ui;
 
-import model.Loadable;
-import model.Player;
-import model.Saveable;
-import model.Team;
+import model.*;
 
 import java.io.*;
 import java.util.Scanner;
@@ -82,9 +79,24 @@ public class FantasyTeam implements Saveable, Loadable {
         System.out.println("Please enter how many assists the player had this gameweek");
         assists = scanner.nextInt();
         scanner.nextLine();
-        Player playerToBeAdded = new Player(playerName,position,goals,assists);
-        System.out.println("You've added " + playerName + " to your team");
+
+        playerAdder(playerName, position, goals, assists);
+    }
+
+    private void playerAdder(String n, String p, int g, int a) {
+        Player playerToBeAdded;
+        if (p.equals("forward")) {
+            playerToBeAdded = new Forward(n,p,g,a);
+        } else if (p.equals("midfielder")) {
+            playerToBeAdded = new Midfielder(n,p,g,a);
+        } else if (p.equals("defender")) {
+            playerToBeAdded = new Defender(n,p,g,a);
+        } else {
+            playerToBeAdded = new Goalkeeper(n,p,g,a);
+        }
         fantasyTeam.addPlayer(playerToBeAdded);
+        System.out.println("You've added " + n + " to your team");
+        System.out.println(playerToBeAdded.calculatePoints());
     }
 
     private void removePlayer() {

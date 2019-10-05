@@ -2,12 +2,12 @@ package model;
 
 import java.io.Serializable;
 
-public class Player implements Serializable {
-    private String playerName;
-    private String position;
-    private int goals;
-    private int assists;
-    private int points;
+public abstract class Player implements Serializable {
+    protected String playerName;
+    protected String position;
+    protected int goals;
+    protected int assists;
+    protected int points;
 
     public Player(String playerName, String position, int goals, int assists) {
         this.playerName = playerName;
@@ -39,14 +39,5 @@ public class Player implements Serializable {
 
     // MODIFIES: this
     // EFFECTS: returns how many points a player got
-    public int calculatePoints() {
-        if (position.equals("forward")) {
-            points = (4 * goals) + (3 * assists);
-        } else if (position.equals("midfielder")) {
-            points = (5 * goals) + (3 * assists);
-        } else {
-            points = (6 * goals) + (3 * assists);
-        }
-        return points;
-    }
+    public abstract int calculatePoints();
 }

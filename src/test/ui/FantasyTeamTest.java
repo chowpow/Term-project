@@ -1,7 +1,6 @@
 package ui;
 
-import model.Team;
-import model.Player;
+import model.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,10 +25,10 @@ class FantasyTeamTest {
 
     @BeforeEach
     void runBefore() {
-        player1 = new Player("Mo Salah", "forward",2,2);
-        player2 = new Player("Paul Pogba","midfielder",1,1);
-        player3 = new Player("Virgil van Dijk","defender",1,0);
-        player4 = new Player("David de Gea","goalkeeper",0,0);
+        player1 = new Forward("Mo Salah", "forward",2,2);
+        player2 = new Midfielder("Paul Pogba","midfielder",1,1);
+        player3 = new Defender("Virgil van Dijk","defender",1,0);
+        player4 = new Goalkeeper("David de Gea","goalkeeper",0,0);
 
         team1 = new Team();
         team2 = new Team();
