@@ -1,7 +1,5 @@
 package ui;
 
-import model.FantasyTeam;
-
 import java.io.*;
 
 public class Main {

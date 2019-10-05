@@ -1,4 +1,9 @@
-package model;
+package ui;
+
+import model.Loadable;
+import model.Player;
+import model.Saveable;
+import model.Team;
 
 import java.io.*;
 import java.util.Scanner;

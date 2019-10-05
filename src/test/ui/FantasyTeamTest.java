@@ -1,6 +1,5 @@
 package ui;
 
-import model.FantasyTeam;
 import model.Team;
 import model.Player;
 
