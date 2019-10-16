@@ -1,6 +1,7 @@
 package model;
 
 public class Goalkeeper extends Player {
+
     public Goalkeeper(String playerName, String position, int goals, int assists) {
         super(playerName, position, goals, assists);
     }

@@ -44,7 +44,7 @@ class TeamTest {
     }
 
     @Test
-    void testGetSquad() {
+    void testGetSquad() throws FantasyTeamFullException {
         Collections.addAll(playerList, player1, player2);
         Collections.addAll(playerList1,player1,player2,player3,player4);
         team2.addPlayer(player1);
@@ -62,7 +62,7 @@ class TeamTest {
     }
 
     @Test
-    void testAddPlayer() {
+    void testAddPlayer() throws FantasyTeamFullException {
         team1.addPlayer(player1);
         assertFalse(team1.getSquad().isEmpty());
 
@@ -82,7 +82,7 @@ class TeamTest {
     }
 
     @Test
-    void testRemovePlayer() {
+    void testRemovePlayer() throws FantasyTeamFullException {
         team1.removePlayer(player1);
         assertTrue(team1.getSquad().isEmpty());
 
@@ -96,7 +96,7 @@ class TeamTest {
     }
 
     @Test
-    void testFindPlayerWithName() {
+    void testFindPlayerWithName() throws FantasyTeamFullException {
         assertNull(team1.findPlayerWithName("Mo Salah"));
 
         team2.addPlayer(player1);
@@ -108,7 +108,7 @@ class TeamTest {
     }
 
     @Test
-    void testAllPlayerNames() {
+    void testAllPlayerNames() throws FantasyTeamFullException {
         assertTrue(team1.allPlayerNames().isEmpty());
 
         team2.addPlayer(player1);
@@ -127,7 +127,7 @@ class TeamTest {
     }
 
     @Test
-    void testCalculateTeamPoints() {
+    void testCalculateTeamPoints() throws FantasyTeamFullException {
         assertEquals(team1.calculateTeamPoints(),0);
 
         team2.addPlayer(player1);

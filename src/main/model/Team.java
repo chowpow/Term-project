@@ -2,7 +2,7 @@ package model;
 
 import model.Player;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +21,10 @@ public class Team implements Serializable {
 
     // MODIFIES: this
     // EFFECTS: adds a player to the team
-    public void addPlayer(Player player) {
+    public void addPlayer(Player player) throws FantasyTeamFullException {
+        if (squad.size() > 11) {
+            throw new FantasyTeamFullException();
+        }
         squad.add(player);
     }
 

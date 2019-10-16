@@ -6,6 +6,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         FantasyTeam fantasyTeam = new FantasyTeam();
-        fantasyTeam.runFantasyTeam();
+        try {
+            fantasyTeam.runFantasyTeam();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        } finally {
+            System.out.println("Thanks for playing!");
+        }
     }
 }

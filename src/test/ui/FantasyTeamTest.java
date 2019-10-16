@@ -24,7 +24,7 @@ class FantasyTeamTest {
     Team team2;
 
     @BeforeEach
-    void runBefore() {
+    void runBefore() throws FantasyTeamFullException {
         player1 = new Forward("Mo Salah", "forward",2,2);
         player2 = new Midfielder("Paul Pogba","midfielder",1,1);
         player3 = new Defender("Virgil van Dijk","defender",1,0);

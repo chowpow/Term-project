@@ -26,7 +26,7 @@ public class FantasyTeam implements Saveable, Loadable {
             function = scanner.nextLine();
             System.out.println("You selected: " + function);
 
-            if (function.equals("5")) {
+            if (function.equals("6")) {
                 save(fantasyTeam);
                 break;
             }
@@ -34,13 +34,18 @@ public class FantasyTeam implements Saveable, Loadable {
         }
     }
 
+    private void printInitialUserInput() {
+        System.out.println("Please pick an option: [6] to load your previous save"
+                + " [7] to make a new team");
+    }
+
     private void printUserInput() {
         System.out.println("Please pick an option: [1] to add player to your team"
                 + " [2] to remove a player from your team"
                 + " [3] to see your team"
                 + " [4] to see how many points your team got"
-                + " [5] to quit"
-                + " [6] to load previous save");
+                + " [5] to load previous save"
+                + " [6] to quit");
     }
 
     private void processUserOperation(String function) throws IOException, ClassNotFoundException {
@@ -56,7 +61,7 @@ public class FantasyTeam implements Saveable, Loadable {
         if (function.equals("4")) {
             viewTeamPoints();
         }
-        if (function.equals("6")) {
+        if (function.equals("5")) {
             fantasyTeam = load();
         }
     }
@@ -94,9 +99,12 @@ public class FantasyTeam implements Saveable, Loadable {
         } else {
             playerToBeAdded = new Goalkeeper(n,p,g,a);
         }
-        fantasyTeam.addPlayer(playerToBeAdded);
-        System.out.println("You've added " + n + " to your team");
-        System.out.println(playerToBeAdded.calculatePoints());
+        try {
+            fantasyTeam.addPlayer(playerToBeAdded);
+            System.out.println("You've added " + n + " to your team");
+        } catch (FantasyTeamFullException exception) {
+            System.out.println("Your fantasy team is full!!");
+        }
     }
 
     private void removePlayer() {
@@ -120,7 +128,6 @@ public class FantasyTeam implements Saveable, Loadable {
         ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("Save.txt"));
         save.writeObject(team);
         save.close();
-
     }
 
     @Override
