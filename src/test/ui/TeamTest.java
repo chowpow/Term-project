@@ -27,10 +27,10 @@ class TeamTest {
 
     @BeforeEach
     void runBefore() {
-        player1 = new Forward("Mo Salah", "forward",2,2);
-        player2 = new Midfielder("Paul Pogba","midfielder",1,1);
-        player3 = new Defender("Virgil van Dijk","defender",1,0);
-        player4 = new Goalkeeper("David de Gea","goalkeeper",0,0);
+        player1 = new Forward("Mo Salah", "forward", 2, 2);
+        player2 = new Midfielder("Paul Pogba", "midfielder", 1, 1);
+        player3 = new Defender("Virgil van Dijk", "defender", 1, 0);
+        player4 = new Goalkeeper("David de Gea", "goalkeeper", 0, 0);
 
         team1 = new Team();
         team2 = new Team();
@@ -46,19 +46,19 @@ class TeamTest {
     @Test
     void testGetSquad() throws FantasyTeamFullException {
         Collections.addAll(playerList, player1, player2);
-        Collections.addAll(playerList1,player1,player2,player3,player4);
+        Collections.addAll(playerList1, player1, player2, player3, player4);
         team2.addPlayer(player1);
         team2.addPlayer(player2);
 
         assertTrue(team1.getSquad().isEmpty());
-        assertEquals(team2.getSquad(),playerList);
+        assertEquals(team2.getSquad(), playerList);
 
         team3.addPlayer(player1);
         team3.addPlayer(player2);
         team3.addPlayer(player3);
         team3.addPlayer(player4);
 
-        assertEquals(team3.getSquad(),playerList1);
+        assertEquals(team3.getSquad(), playerList1);
     }
 
     @Test
@@ -114,7 +114,7 @@ class TeamTest {
         team2.addPlayer(player1);
         team2.addPlayer(player2);
 
-        Collections.addAll(playerNameList,"Mo Salah", "Paul Pogba");
+        Collections.addAll(playerNameList, "Mo Salah", "Paul Pogba");
         assertEquals(team2.allPlayerNames(), playerNameList);
 
         team3.addPlayer(player1);
@@ -122,19 +122,19 @@ class TeamTest {
         team3.addPlayer(player3);
         team3.addPlayer(player4);
 
-        Collections.addAll(playerNameList,"Virgil van Dijk","David de Gea");
+        Collections.addAll(playerNameList, "Virgil van Dijk", "David de Gea");
         assertEquals(team3.allPlayerNames(), playerNameList);
     }
 
     @Test
     void testCalculateTeamPoints() throws FantasyTeamFullException {
-        assertEquals(team1.calculateTeamPoints(),0);
+        assertEquals(team1.calculateTeamPoints(), 0);
 
         team2.addPlayer(player1);
         team2.addPlayer(player2);
 
         teamScore = player1.calculatePoints() + player2.calculatePoints();
-        assertEquals(team2.calculateTeamPoints(),teamScore);
+        assertEquals(team2.calculateTeamPoints(), teamScore);
 
         team3.addPlayer(player1);
         team3.addPlayer(player2);
@@ -142,7 +142,30 @@ class TeamTest {
         team3.addPlayer(player4);
 
         teamScore = teamScore + player3.calculatePoints() + player4.calculatePoints();
-        assertEquals(team3.calculateTeamPoints(),teamScore);
+        assertEquals(team3.calculateTeamPoints(), teamScore);
     }
 
+    @Test
+    void testTooManyPlayers() throws FantasyTeamFullException {
+        try {
+            for (int i = 0; i < 12; i++) {
+                team1.addPlayer(player1);
+            }
+        } catch (FantasyTeamFullException e) {
+        }
+    }
+
+    @Test
+    void testTeamNotFull() throws FantasyTeamFullException {
+        try {
+            for (int i = 0; i < 11; i++) {
+                team1.addPlayer(player1);
+            }
+        } catch (FantasyTeamFullException e) {
+            fail("Test Failed!");
+        }
+    }
 }
+
+
+

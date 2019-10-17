@@ -20,9 +20,9 @@ public class Team implements Serializable {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds a player to the team
+    // EFFECTS: adds a player to the team, throws FantasyTeamFullException if more than 11 players
     public void addPlayer(Player player) throws FantasyTeamFullException {
-        if (squad.size() > 11) {
+        if (squad.size() >= 11) {
             throw new FantasyTeamFullException();
         }
         squad.add(player);
