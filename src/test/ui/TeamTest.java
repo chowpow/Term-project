@@ -147,20 +147,23 @@ class TeamTest {
 
     @Test
     void testTooManyPlayers() throws FantasyTeamFullException {
+        for (int i = 0; i < 11; i++) {
+            team1.addPlayer(player1);
+        }
         try {
-            for (int i = 0; i < 12; i++) {
-                team1.addPlayer(player1);
-            }
+            team1.addPlayer(player1);
+            fail("Failed test!");
         } catch (FantasyTeamFullException e) {
         }
     }
 
     @Test
     void testTeamNotFull() throws FantasyTeamFullException {
+        for (int i = 0; i < 10; i++) {
+            team1.addPlayer(player1);
+        }
         try {
-            for (int i = 0; i < 11; i++) {
-                team1.addPlayer(player1);
-            }
+            team1.addPlayer(player1);
         } catch (FantasyTeamFullException e) {
             fail("Test Failed!");
         }
