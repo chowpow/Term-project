@@ -18,6 +18,7 @@ public class FantasyTeam implements Saveable, Loadable {
         processFantasyTeam();
     }
 
+    // processFantasyTeam() and use of scanner from LoggingCalculator
     private void processFantasyTeam() throws IOException, ClassNotFoundException {
         String function = null;
 
@@ -48,6 +49,7 @@ public class FantasyTeam implements Saveable, Loadable {
                 + " [6] to quit");
     }
 
+    // processUserOperation() from LoggingCalculator
     private void processUserOperation(String function) throws IOException, ClassNotFoundException {
         if (function.equals("1")) {
             addPlayerToTeam();
@@ -123,6 +125,7 @@ public class FantasyTeam implements Saveable, Loadable {
         System.out.println("Your team got " + fantasyTeam.calculateTeamPoints() + " points!");
     }
 
+    // Saving and load functions from https://www.youtube.com/watch?v=bRuxXAF-Ysk
     @Override
     public void save(Team team) throws IOException {
         ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("Save.txt"));
