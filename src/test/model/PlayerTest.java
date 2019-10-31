@@ -30,10 +30,10 @@ class PlayerTest {
     @Test
     void testAddMatch() {
         player1.addMatch(match1);
-        player2.addMatch(match1);
+        match1.addPlayer(player2);
         player2.addMatch(match2);
         player5.addMatch(match2);
-
+        
         assertTrue(player1.matches.contains(match1));
         assertTrue(player2.matches.contains(match1));
         assertTrue(player2.matches.contains(match2));
