@@ -1,4 +1,4 @@
-package ui;
+package model;
 
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,10 +20,18 @@ class TeamTest {
     Player player2;
     Player player3;
     Player player4;
+    Player player5;
+    Player player6;
+    Player player7;
+    Player player8;
+    Player player9;
+    Player player10;
+    Player player11;
+    Player player12;
 
-    ArrayList<Player> playerList;
-    ArrayList<Player> playerList1;
-    ArrayList<String> playerNameList;
+    Set<Player> playerList;
+    Set<Player> playerList1;
+    Set<String> playerNameList;
 
     int teamScore;
 
@@ -31,14 +41,22 @@ class TeamTest {
         player2 = new Midfielder("Paul Pogba", "midfielder", 1, 1);
         player3 = new Defender("Virgil van Dijk", "defender", 1, 0);
         player4 = new Goalkeeper("David de Gea", "goalkeeper", 0, 0);
+        player5 = new Forward("Raheem Sterling", "forward", 0,0);
+        player6 = new Midfielder("James Maddison", "midfielder", 1, 1);
+        player7 = new Defender("Harry Maguire", "defender", 1, 0);
+        player8 = new Forward("Marcus Rashford", "forward", 1, 0);
+        player9 = new Forward("Jamie Vardy", "forward", 1, 0);
+        player10 = new Midfielder("Christian Eriksen", "midfielder", 1, 0);
+        player11 = new Defender("David Luiz", "defender", 1, 0);
+        player12 = new Forward("Sergio Aguero","forward",0,0);
 
         team1 = new Team();
         team2 = new Team();
         team3 = new Team();
 
-        playerList = new ArrayList<Player>();
-        playerList1 = new ArrayList<Player>();
-        playerNameList = new ArrayList<String>();
+        playerList = new HashSet<>();
+        playerList1 = new HashSet<>();
+        playerNameList = new HashSet<>();
 
         teamScore = 0;
     }
@@ -50,15 +68,33 @@ class TeamTest {
         team2.addPlayer(player1);
         team2.addPlayer(player2);
 
-        assertTrue(team1.getSquad().isEmpty());
-        assertEquals(team2.getSquad(), playerList);
+        assertTrue(team2.getSquad().equals(playerList));
 
         team3.addPlayer(player1);
         team3.addPlayer(player2);
         team3.addPlayer(player3);
         team3.addPlayer(player4);
 
-        assertEquals(team3.getSquad(), playerList1);
+        assertTrue(team3.getSquad().equals(playerList1));
+    }
+
+    @Test
+    void testGetPlayer() throws FantasyTeamFullException {
+        team1.addPlayer(player1);
+        team1.addPlayer(player2);
+        team1.addPlayer(player3);
+
+        assertEquals(player1, team1.getPlayer("Mo Salah"));
+        assertFalse(player2.equals(team1.getPlayer("Mo Salah")));
+    }
+
+    @Test
+    void testSizeOfSquad() throws FantasyTeamFullException {
+        team1.addPlayer(player1);
+        team1.addPlayer(player2);
+        team1.addPlayer(player3);
+        team1.addPlayer(player4);
+        assertEquals(4,team1.sizeOfSquad());
     }
 
     @Test
@@ -83,28 +119,16 @@ class TeamTest {
 
     @Test
     void testRemovePlayer() throws FantasyTeamFullException {
-        team1.removePlayer(player1);
+        team1.removePlayer("Mo Salah");
         assertTrue(team1.getSquad().isEmpty());
 
         team2.addPlayer(player1);
         team2.addPlayer(player2);
-        team2.removePlayer(player1);
+        team2.removePlayer("Mo Salah");
         assertFalse(team2.getSquad().contains(player1));
         assertTrue(team2.getSquad().contains(player2));
-        team2.removePlayer(player2);
+        team2.removePlayer("Paul Pogba");
         assertTrue(team2.getSquad().isEmpty());
-    }
-
-    @Test
-    void testFindPlayerWithName() throws FantasyTeamFullException {
-        assertNull(team1.findPlayerWithName("Mo Salah"));
-
-        team2.addPlayer(player1);
-        team2.addPlayer(player2);
-
-        assertEquals(team2.findPlayerWithName("Mo Salah"), player1);
-        assertEquals(team2.findPlayerWithName("Paul Pogba"), player2);
-        assertNull(team2.findPlayerWithName("Sadio Mane"));
     }
 
     @Test
@@ -115,7 +139,7 @@ class TeamTest {
         team2.addPlayer(player2);
 
         Collections.addAll(playerNameList, "Mo Salah", "Paul Pogba");
-        assertEquals(team2.allPlayerNames(), playerNameList);
+        assertTrue(team2.allPlayerNames().equals(playerNameList));
 
         team3.addPlayer(player1);
         team3.addPlayer(player2);
@@ -123,7 +147,7 @@ class TeamTest {
         team3.addPlayer(player4);
 
         Collections.addAll(playerNameList, "Virgil van Dijk", "David de Gea");
-        assertEquals(team3.allPlayerNames(), playerNameList);
+        assertTrue(team3.allPlayerNames().equals(playerNameList));
     }
 
     @Test
@@ -147,11 +171,20 @@ class TeamTest {
 
     @Test
     void testTooManyPlayers() throws FantasyTeamFullException {
-        for (int i = 0; i < 11; i++) {
-            team1.addPlayer(player1);
-        }
+        team1.addPlayer(player1);
+        team1.addPlayer(player2);
+        team1.addPlayer(player3);
+        team1.addPlayer(player4);
+        team1.addPlayer(player5);
+        team1.addPlayer(player6);
+        team1.addPlayer(player7);
+        team1.addPlayer(player8);
+        team1.addPlayer(player9);
+        team1.addPlayer(player10);
+        team1.addPlayer(player11);
+
         try {
-            team1.addPlayer(player1);
+            team1.addPlayer(player12);
             fail("Failed test!");
         } catch (FantasyTeamFullException e) {
         }
@@ -159,11 +192,19 @@ class TeamTest {
 
     @Test
     void testTeamNotFull() throws FantasyTeamFullException {
-        for (int i = 0; i < 10; i++) {
-            team1.addPlayer(player1);
-        }
+        team1.addPlayer(player1);
+        team1.addPlayer(player2);
+        team1.addPlayer(player3);
+        team1.addPlayer(player4);
+        team1.addPlayer(player5);
+        team1.addPlayer(player6);
+        team1.addPlayer(player7);
+        team1.addPlayer(player8);
+        team1.addPlayer(player9);
+        team1.addPlayer(player10);
+
         try {
-            team1.addPlayer(player1);
+            team1.addPlayer(player11);
         } catch (FantasyTeamFullException e) {
             fail("Test Failed!");
         }

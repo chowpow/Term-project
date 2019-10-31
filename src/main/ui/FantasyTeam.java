@@ -35,18 +35,15 @@ public class FantasyTeam implements Saveable, Loadable {
         }
     }
 
-    private void printInitialUserInput() {
-        System.out.println("Please pick an option: [6] to load your previous save"
-                + " [7] to make a new team");
-    }
-
     private void printUserInput() {
         System.out.println("Please pick an option: [1] to add player to your team"
                 + " [2] to remove a player from your team"
                 + " [3] to see your team"
                 + " [4] to see how many points your team got"
+                + "\n"
                 + " [5] to load previous save"
-                + " [6] to quit");
+                + " [6] to quit"
+                + " [7] to see how many points a player got");
     }
 
     // processUserOperation() from LoggingCalculator
@@ -66,6 +63,16 @@ public class FantasyTeam implements Saveable, Loadable {
         if (function.equals("5")) {
             fantasyTeam = load();
         }
+        if (function.equals("7")) {
+            seePlayerPoints();
+        }
+    }
+
+    private void seePlayerPoints() {
+        String playerName;
+        System.out.println("Which player's points would you like to check?");
+        playerName = scanner.nextLine();
+        System.out.println(playerName + " got " + fantasyTeam.getPlayer(playerName).calculatePoints() + " points!");
     }
 
     private void addPlayerToTeam() {
@@ -114,7 +121,7 @@ public class FantasyTeam implements Saveable, Loadable {
         System.out.println("Enter the name of the player you would like to remove");
         playerToBeRemoved = scanner.nextLine();
         System.out.println("You've removed " + playerToBeRemoved + " from your team");
-        fantasyTeam.removePlayer(fantasyTeam.findPlayerWithName(playerToBeRemoved));
+        fantasyTeam.removePlayer(playerToBeRemoved);
     }
 
     private void viewTeam() {
