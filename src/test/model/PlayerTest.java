@@ -10,6 +10,10 @@ class PlayerTest {
     Player player2;
     Player player3;
     Player player4;
+    Player player5;
+
+    Match match1;
+    Match match2;
 
     @BeforeEach
     void runBefore() {
@@ -17,6 +21,28 @@ class PlayerTest {
         player2 = new Midfielder("Paul Pogba","midfielder",1,1);
         player3 = new Defender("Virgil van Dijk","defender",1,0);
         player4 = new Goalkeeper("David de Gea","goalkeeper",0,0);
+        player5 = new Forward("Sergio Aguero", "forward", 0, 0);
+
+        match1 = new Match("Liverpool vs Manchester United");
+        match2 = new Match("Manchester United vs Manchester City");
+    }
+
+    @Test
+    void testAddMatch() {
+        player1.addMatch(match1);
+        player2.addMatch(match1);
+        player2.addMatch(match2);
+        player5.addMatch(match2);
+
+        assertTrue(player1.matches.contains(match1));
+        assertTrue(player2.matches.contains(match1));
+        assertTrue(player2.matches.contains(match2));
+        assertTrue(player5.matches.contains(match2));
+
+        assertTrue(match1.players.contains(player1));
+        assertTrue(match1.players.contains(player2));
+        assertTrue(match2.players.contains(player2));
+        assertTrue(match2.players.contains(player5));
     }
 
     @Test

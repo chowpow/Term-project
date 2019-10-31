@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Player implements Serializable {
     protected String playerName;
@@ -8,6 +10,7 @@ public abstract class Player implements Serializable {
     protected int goals;
     protected int assists;
     protected int points;
+    protected List<Match> matches;
 
     public Player(String playerName, String position, int goals, int assists) {
         this.playerName = playerName;
@@ -15,6 +18,7 @@ public abstract class Player implements Serializable {
         this.goals = goals;
         this.assists = assists;
         points = 0;
+        matches = new ArrayList<>();
     }
 
     // EFFECTS: returns the player's name
@@ -40,4 +44,13 @@ public abstract class Player implements Serializable {
     // MODIFIES: this
     // EFFECTS: returns how many points a player got
     public abstract int calculatePoints();
+
+    // MODIFIES: this
+    // EFFECTS: adds player to Match m and adds Match m to this
+    public void addMatch(Match m) {
+        if (!matches.contains(m)) {
+            matches.add(m);
+            m.addPlayer(this);
+        }
+    }
 }
