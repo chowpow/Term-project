@@ -3,14 +3,15 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Player implements Serializable {
-    protected String playerName;
-    protected String position;
+    private static final long serialVersionUID = 8710558539120338013L;
+    private String playerName;
+    private String position;
     protected int goals;
     protected int assists;
     protected int points;
-    protected List<Match> matches;
 
     public Player(String playerName, String position, int goals, int assists) {
         this.playerName = playerName;
@@ -18,7 +19,6 @@ public abstract class Player implements Serializable {
         this.goals = goals;
         this.assists = assists;
         points = 0;
-        matches = new ArrayList<>();
     }
 
     // EFFECTS: returns the player's name
@@ -45,12 +45,21 @@ public abstract class Player implements Serializable {
     // EFFECTS: returns how many points a player got
     public abstract int calculatePoints();
 
-    // MODIFIES: this
-    // EFFECTS: adds player to Match m and adds Match m to this
-    public void addMatch(Match m) {
-        if (!matches.contains(m)) {
-            matches.add(m);
-            m.addPlayer(this);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Player player = (Player) o;
+        return playerName.equals(player.playerName);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerName, position, goals, assists, points);
     }
 }

@@ -12,8 +12,6 @@ class PlayerTest {
     Player player4;
     Player player5;
 
-    Match match1;
-    Match match2;
 
     @BeforeEach
     void runBefore() {
@@ -22,27 +20,6 @@ class PlayerTest {
         player3 = new Defender("Virgil van Dijk","defender",1,0);
         player4 = new Goalkeeper("David de Gea","goalkeeper",0,0);
         player5 = new Forward("Sergio Aguero", "forward", 0, 0);
-
-        match1 = new Match("Liverpool vs Manchester United");
-        match2 = new Match("Manchester United vs Manchester City");
-    }
-
-    @Test
-    void testAddMatch() {
-        player1.addMatch(match1);
-        match1.addPlayer(player2);
-        player2.addMatch(match2);
-        player5.addMatch(match2);
-        
-        assertTrue(player1.matches.contains(match1));
-        assertTrue(player2.matches.contains(match1));
-        assertTrue(player2.matches.contains(match2));
-        assertTrue(player5.matches.contains(match2));
-
-        assertTrue(match1.players.contains(player1));
-        assertTrue(match1.players.contains(player2));
-        assertTrue(match2.players.contains(player2));
-        assertTrue(match2.players.contains(player5));
     }
 
     @Test
@@ -85,5 +62,10 @@ class PlayerTest {
         assertEquals(0,player4.calculatePoints());
     }
 
-
+    @Test
+    void testEquals() {
+        assertTrue(player1.equals(new Forward("Mo Salah", "forward",2,2)));
+        assertTrue(player1.equals(player1));
+        assertFalse(player1.equals(null));
+    }
 }

@@ -84,6 +84,8 @@ class TeamTest {
         team1.addPlayer(player2);
         team1.addPlayer(player3);
 
+        System.out.println(player1 == player2);
+
         assertEquals(player1, team1.getPlayer("Mo Salah"));
         assertFalse(player2.equals(team1.getPlayer("Mo Salah")));
     }

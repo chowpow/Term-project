@@ -1,16 +1,15 @@
 package model;
 
-import model.Player;
-
 import java.io.*;
 import java.util.*;
 
 public class Team implements Serializable {
-    private HashMap<String, Player> squad1;
+    private static final long serialVersionUID = 3975000037569581182L;
+    private HashMap<String, Player> squad;
     private int teamPoints;
 
     public Team() {
-        squad1 = new HashMap<>();
+        squad = new HashMap<>();
     }
 
     // Retrieving all values from HashMap from https://stackoverflow.com/questions/12960265/retrieve-all-values-from-hashmap-keys-in-an-arraylist-java
@@ -18,42 +17,42 @@ public class Team implements Serializable {
     // EFFECTS: returns all the players in the team
     public Set<Player> getSquad() {
         Set<Player> squad = new HashSet<>();
-        for (String key: squad1.keySet()) {
-            squad.add(squad1.get(key));
+        for (String key: this.squad.keySet()) {
+            squad.add(this.squad.get(key));
         }
         return squad;
     }
 
     // EFFECTS: returns the player mapped by the key
     public Player getPlayer(String playerName) {
-        return squad1.get(playerName);
+        return squad.get(playerName);
     }
 
     // EFFECTS: returns size of squad
     public int sizeOfSquad() {
-        return squad1.size();
+        return squad.size();
     }
 
     // MODIFIES: this
     // EFFECTS: adds a player to the team, throws FantasyTeamFullException if more than 11 players
     public void addPlayer(Player player) throws FantasyTeamFullException {
-        if (squad1.size() >= 11) {
+        if (squad.size() >= 11) {
             throw new FantasyTeamFullException();
         }
-        squad1.put(player.playerName, player);
+        squad.put(player.getPlayerName(), player);
     }
 
     // MODIFIES: this
     // EFFECTS: removes a player from the team
     public void removePlayer(String playerName) {
-        squad1.remove(playerName);
+        squad.remove(playerName);
     }
 
     // EFFECTS: returns the names of all players in the team
     public Set<String> allPlayerNames() {
         Set<String> allPlayersInTeam = new HashSet<>();
-        for (String key: squad1.keySet()) {
-            allPlayersInTeam.add(squad1.get(key).playerName);
+        for (String key: squad.keySet()) {
+            allPlayersInTeam.add(squad.get(key).getPlayerName());
         }
         return allPlayersInTeam;
     }
@@ -62,8 +61,8 @@ public class Team implements Serializable {
     // EFFECTS: returns the total points in a team
     public int calculateTeamPoints() {
         teamPoints = 0;
-        for (String key: squad1.keySet()) {
-            teamPoints += squad1.get(key).points;
+        for (String key: squad.keySet()) {
+            teamPoints += squad.get(key).calculatePoints();
         }
         return teamPoints;
     }
