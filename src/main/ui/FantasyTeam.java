@@ -12,6 +12,7 @@ public class FantasyTeam implements Saveable, Loadable {
     public FantasyTeam() {
         scanner = new Scanner(System.in);
         fantasyTeam = new Team();
+
     }
 
     public void runFantasyTeam() throws IOException, ClassNotFoundException {
@@ -68,13 +69,6 @@ public class FantasyTeam implements Saveable, Loadable {
         }
     }
 
-    private void seePlayerPoints() {
-        String playerName;
-        System.out.println("Which player's points would you like to check?");
-        playerName = scanner.nextLine();
-        System.out.println(playerName + " got " + fantasyTeam.getPlayer(playerName).calculatePoints() + " points!");
-    }
-
     private void addPlayerToTeam() {
         String playerName;
         String position;
@@ -94,23 +88,32 @@ public class FantasyTeam implements Saveable, Loadable {
         assists = scanner.nextInt();
         scanner.nextLine();
 
-        playerAdder(playerName, position, goals, assists);
+        playerCreator(playerName, position, goals, assists);
     }
 
-    private void playerAdder(String n, String p, int g, int a) {
+    private void playerCreator(String n, String p, int g, int a) {
         Player playerToBeAdded;
-        if (p.equals("forward")) {
-            playerToBeAdded = new Forward(n,p,g,a);
-        } else if (p.equals("midfielder")) {
-            playerToBeAdded = new Midfielder(n,p,g,a);
-        } else if (p.equals("defender")) {
-            playerToBeAdded = new Defender(n,p,g,a);
-        } else {
-            playerToBeAdded = new Goalkeeper(n,p,g,a);
+        switch (p) {
+            case "forward":
+                playerToBeAdded = new Forward(n, p, g, a);
+                break;
+            case "midfielder":
+                playerToBeAdded = new Midfielder(n, p, g, a);
+                break;
+            case "defender":
+                playerToBeAdded = new Defender(n, p, g, a);
+                break;
+            default:
+                playerToBeAdded = new Goalkeeper(n, p, g, a);
+                break;
         }
+        playerAdder(n, playerToBeAdded);
+    }
+
+    private void playerAdder(String n, Player playerToBeAdded) {
         try {
             fantasyTeam.addPlayer(playerToBeAdded);
-            System.out.println("You've added " + n + " to your team");
+            //System.out.println("You've added " + n + " to your team");
         } catch (FantasyTeamFullException exception) {
             System.out.println("Your fantasy team is full!!");
         }
@@ -130,6 +133,13 @@ public class FantasyTeam implements Saveable, Loadable {
 
     private void viewTeamPoints() {
         System.out.println("Your team got " + fantasyTeam.calculateTeamPoints() + " points!");
+    }
+
+    private void seePlayerPoints() {
+        String playerName;
+        System.out.println("Which player's points would you like to check?");
+        playerName = scanner.nextLine();
+        System.out.println(playerName + " got " + fantasyTeam.getPlayer(playerName).calculatePoints() + " points!");
     }
 
     // Saving and load functions from https://www.youtube.com/watch?v=bRuxXAF-Ysk

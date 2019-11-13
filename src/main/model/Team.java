@@ -1,15 +1,18 @@
 package model;
 
+import observer.TeamObserver;
+
 import java.io.*;
 import java.util.*;
 
-public class Team implements Serializable {
+public class Team extends Observable implements Serializable {
     private static final long serialVersionUID = 3975000037569581182L;
     private HashMap<String, Player> squad;
     private int teamPoints;
 
     public Team() {
         squad = new HashMap<>();
+        addObserver(new TeamObserver());
     }
 
     // Retrieving all values from HashMap from https://stackoverflow.com/questions/12960265/retrieve-all-values-from-hashmap-keys-in-an-arraylist-java
@@ -40,6 +43,8 @@ public class Team implements Serializable {
             throw new FantasyTeamFullException();
         }
         squad.put(player.getPlayerName(), player);
+        setChanged();
+        notifyObservers(player);
     }
 
     // MODIFIES: this

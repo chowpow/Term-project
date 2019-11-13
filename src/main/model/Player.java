@@ -7,8 +7,8 @@ import java.util.Objects;
 
 public abstract class Player implements Serializable {
     private static final long serialVersionUID = 8710558539120338013L;
-    private String playerName;
-    private String position;
+    protected String playerName;
+    protected String position;
     protected int goals;
     protected int assists;
     protected int points;
@@ -61,5 +61,10 @@ public abstract class Player implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(playerName, position, goals, assists, points);
+    }
+
+    @Override
+    public String toString() {
+        return playerName;
     }
 }
