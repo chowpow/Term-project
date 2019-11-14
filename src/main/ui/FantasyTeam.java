@@ -123,7 +123,7 @@ public class FantasyTeam implements Saveable, Loadable {
         String playerToBeRemoved;
         System.out.println("Enter the name of the player you would like to remove");
         playerToBeRemoved = scanner.nextLine();
-        System.out.println("You've removed " + playerToBeRemoved + " from your team");
+        //System.out.println("You've removed " + playerToBeRemoved + " from your team");
         fantasyTeam.removePlayer(playerToBeRemoved);
     }
 
