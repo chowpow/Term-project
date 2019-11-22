@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import observer.TeamObserver;
 
 import java.io.*;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class FantasyTeam implements Saveable, Loadable {
     public FantasyTeam() {
         scanner = new Scanner(System.in);
         fantasyTeam = new Team();
+        fantasyTeam.addObserver(new TeamObserver());
 
     }
 
@@ -21,7 +23,7 @@ public class FantasyTeam implements Saveable, Loadable {
 
     // processFantasyTeam() and use of scanner from LoggingCalculator
     private void processFantasyTeam() throws IOException, ClassNotFoundException {
-        String function = null;
+        String function;
 
         while (true) {
             printUserInput();
@@ -62,7 +64,7 @@ public class FantasyTeam implements Saveable, Loadable {
             viewTeamPoints();
         }
         if (function.equals("5")) {
-            fantasyTeam = load();
+            fantasyTeam = this.load();
         }
         if (function.equals("7")) {
             seePlayerPoints();
@@ -107,13 +109,12 @@ public class FantasyTeam implements Saveable, Loadable {
                 playerToBeAdded = new Goalkeeper(n, p, g, a);
                 break;
         }
-        playerAdder(n, playerToBeAdded);
+        playerAdder(playerToBeAdded);
     }
 
-    private void playerAdder(String n, Player playerToBeAdded) {
+    private void playerAdder(Player playerToBeAdded) {
         try {
             fantasyTeam.addPlayer(playerToBeAdded);
-            //System.out.println("You've added " + n + " to your team");
         } catch (FantasyTeamFullException exception) {
             System.out.println("Your fantasy team is full!!");
         }
@@ -123,7 +124,6 @@ public class FantasyTeam implements Saveable, Loadable {
         String playerToBeRemoved;
         System.out.println("Enter the name of the player you would like to remove");
         playerToBeRemoved = scanner.nextLine();
-        //System.out.println("You've removed " + playerToBeRemoved + " from your team");
         fantasyTeam.removePlayer(playerToBeRemoved);
     }
 
@@ -155,6 +155,9 @@ public class FantasyTeam implements Saveable, Loadable {
         ObjectInputStream load = new ObjectInputStream(new FileInputStream("Save.txt"));
         Team team;
         team = (Team) load.readObject();
+        TeamObserver teamObserver = new TeamObserver();
+        teamObserver.setNumOfPlayers(team.sizeOfSquad());
+        team.addObserver(teamObserver);
         return team;
     }
 

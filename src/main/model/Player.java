@@ -55,7 +55,6 @@ public abstract class Player implements Serializable {
         }
         Player player = (Player) o;
         return playerName.equals(player.playerName);
-
     }
 
     @Override

@@ -9,11 +9,11 @@ public class Team extends Observable implements Serializable {
     private static final long serialVersionUID = 3975000037569581182L;
     private HashMap<String, Player> squad;
     private int teamPoints;
-    private TeamObserver teamObserver = new TeamObserver();
+    private Boolean isAddingPlayer;
+    //private TeamObserver teamObserver = new TeamObserver();
 
     public Team() {
         squad = new HashMap<>();
-        addObserver(teamObserver);
     }
 
     // Retrieving all values from HashMap from https://stackoverflow.com/questions/12960265/retrieve-all-values-from-hashmap-keys-in-an-arraylist-java
@@ -44,18 +44,18 @@ public class Team extends Observable implements Serializable {
             throw new FantasyTeamFullException();
         }
         squad.put(player.getPlayerName(), player);
-        teamObserver.addPlayerNumber();
+        isAddingPlayer = true;
         setChanged();
-        notifyObservers(player);
+        notifyObservers(player.getPlayerName());
     }
 
     // MODIFIES: this
     // EFFECTS: removes a player from the team
     public void removePlayer(String playerName) {
         squad.remove(playerName);
-        teamObserver.subtractPlayerNumber();
+        isAddingPlayer = false;
         setChanged();
-        teamObserver.update(playerName);
+        notifyObservers(playerName);
     }
 
     // EFFECTS: returns the names of all players in the team
@@ -76,4 +76,10 @@ public class Team extends Observable implements Serializable {
         }
         return teamPoints;
     }
+
+    // EFFECTS: returns whether a player is being added or removed
+    public Boolean getAddingPlayer() {
+        return isAddingPlayer;
+    }
 }
+

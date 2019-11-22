@@ -107,6 +107,9 @@ class TeamTest {
         team2.addPlayer(player1);
         team2.addPlayer(player2);
 
+        assertTrue(team1.getAddingPlayer());
+        assertTrue(team2.getAddingPlayer());
+
         assertTrue(team2.getSquad().contains(player1));
         assertTrue(team2.getSquad().contains(player2));
 
@@ -123,10 +126,12 @@ class TeamTest {
     void testRemovePlayer() throws FantasyTeamFullException {
         team1.removePlayer("Mo Salah");
         assertTrue(team1.getSquad().isEmpty());
+        assertFalse(team1.getAddingPlayer());
 
         team2.addPlayer(player1);
         team2.addPlayer(player2);
         team2.removePlayer("Mo Salah");
+        assertFalse(team2.getAddingPlayer());
         assertFalse(team2.getSquad().contains(player1));
         assertTrue(team2.getSquad().contains(player2));
         team2.removePlayer("Paul Pogba");
