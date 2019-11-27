@@ -14,6 +14,8 @@ public class TeamObserver implements Observer, Serializable {
     public TeamObserver() {
     }
 
+    // MODIFIES: this
+    // EFFECTS: updates numOfPlayers and prints observer message
     @Override
     public void update(Observable o, Object arg) {
         Team team = (Team) o;

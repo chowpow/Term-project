@@ -5,10 +5,11 @@ import observer.TeamObserver;
 
 import java.io.*;
 import java.util.Scanner;
+import java.util.Set;
 
 public class FantasyTeam implements Saveable, Loadable {
     private Scanner scanner;
-    private Team fantasyTeam;
+    protected Team fantasyTeam;
 
     public FantasyTeam() {
         scanner = new Scanner(System.in);
@@ -71,7 +72,7 @@ public class FantasyTeam implements Saveable, Loadable {
         }
     }
 
-    private void addPlayerToTeam() {
+    protected void addPlayerToTeam() {
         String playerName;
         String position;
         int goals;
@@ -93,7 +94,7 @@ public class FantasyTeam implements Saveable, Loadable {
         playerCreator(playerName, position, goals, assists);
     }
 
-    private void playerCreator(String n, String p, int g, int a) {
+    protected void playerCreator(String n, String p, int g, int a) {
         Player playerToBeAdded;
         switch (p) {
             case "forward":
@@ -120,29 +121,52 @@ public class FantasyTeam implements Saveable, Loadable {
         }
     }
 
-    private void removePlayer() {
+    protected void removePlayer() {
         String playerToBeRemoved;
         System.out.println("Enter the name of the player you would like to remove");
         playerToBeRemoved = scanner.nextLine();
-        fantasyTeam.removePlayer(playerToBeRemoved);
+        removePlayerFromTeam(playerToBeRemoved);
     }
 
-    private void viewTeam() {
+    protected void removePlayerFromTeam(String playerTobeRemoved) {
+        fantasyTeam.removePlayer(playerTobeRemoved);
+    }
+
+    protected void viewTeam() {
         System.out.println(fantasyTeam.allPlayerNames());
     }
 
-    private void viewTeamPoints() {
+    // set of String to String from https://stackoverflow.com/questions/3042060/fastest-way-to-put-contents-of-setstring-to-a-single-string-with-words-separat
+    protected String returnAllPlayerNames() {
+        return String.join(", ", fantasyTeam.allPlayerNames());
+    }
+
+    protected void viewTeamPoints() {
         System.out.println("Your team got " + fantasyTeam.calculateTeamPoints() + " points!");
     }
 
-    private void seePlayerPoints() {
+    protected String viewTeamPointsString() {
+        return Integer.toString(fantasyTeam.calculateTeamPoints());
+    }
+
+    protected void seePlayerPoints() {
         String playerName;
         System.out.println("Which player's points would you like to check?");
         playerName = scanner.nextLine();
         System.out.println(playerName + " got " + fantasyTeam.getPlayer(playerName).calculatePoints() + " points!");
     }
 
+    protected Team getFantasyTeam() {
+        return fantasyTeam;
+    }
+
+    public void setFantasyTeam(Team fantasyTeam) {
+        this.fantasyTeam = fantasyTeam;
+    }
+
     // Saving and load functions from https://www.youtube.com/watch?v=bRuxXAF-Ysk
+
+    // EFFECTS: save team to file "Save.txt"
     @Override
     public void save(Team team) throws IOException {
         ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("Save.txt"));
@@ -151,6 +175,7 @@ public class FantasyTeam implements Saveable, Loadable {
     }
 
     @Override
+    // EFFECTS: load the team saved in "Save.txt", adds an observer to the team and return it
     public Team load() throws IOException, ClassNotFoundException {
         ObjectInputStream load = new ObjectInputStream(new FileInputStream("Save.txt"));
         Team team;
@@ -160,5 +185,4 @@ public class FantasyTeam implements Saveable, Loadable {
         team.addObserver(teamObserver);
         return team;
     }
-
 }
