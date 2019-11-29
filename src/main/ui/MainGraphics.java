@@ -7,8 +7,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -16,10 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,6 +28,7 @@ import java.io.IOException;
 public class MainGraphics extends Application {
     private int width = 600;
     private int height = 600;
+
     private Button startButton;
     private Button quitButton;
     private Button playerAddButton;
@@ -114,6 +114,7 @@ public class MainGraphics extends Application {
         launch(args);
     }
 
+    // Image loading from https://www.tutorialspoint.com/javafx/javafx_images.htm
     // Changing pane colour from https://stackoverflow.com/questions/22614758/issue-with-background-color-in-javafx-8
     private void startScene() throws FileNotFoundException {
         // Menu image
@@ -134,7 +135,7 @@ public class MainGraphics extends Application {
         layout1.getChildren().add(vbox);
         layout1.getChildren().add(loadingImage);
         StackPane.setAlignment(vbox, Pos.CENTER);
-        layout1.setStyle("-fx-background-color: #03befc;");
+        layout1.setStyle("-fx-background-color: #a5b1c2;");
         scene1 = new Scene(layout1, width, height);
     }
 
@@ -164,7 +165,7 @@ public class MainGraphics extends Application {
         StackPane layout2 = new StackPane();
         layout2.getChildren().addAll(vbox);
         StackPane.setAlignment(vbox, Pos.CENTER);
-        layout2.setStyle("-fx-background-color: #00ccff;");
+        layout2.setStyle("-fx-background-color: #48dbfb;");
         scene2 = new Scene(layout2, width, height);
     }
 
@@ -191,7 +192,7 @@ public class MainGraphics extends Application {
     private void removeScene() {
         layout4 = new GridPane();
         layout4.setPadding(new Insets(50, 50, 50, 50));
-        layout4.setStyle("-fx-background-color: #0099ff;");
+        layout4.setStyle("-fx-background-color: #54a0ff;");
         layout4.setVgap(5);
         layout4.setHgap(5);
 
@@ -262,7 +263,7 @@ public class MainGraphics extends Application {
     private void setUpLayput3() {
         layout3 = new GridPane();
         layout3.setPadding(new Insets(50, 50, 50, 50));
-        layout3.setStyle("-fx-background-color: #0099ff;");
+        layout3.setStyle("-fx-background-color: #54a0ff;");
         layout3.setVgap(10);
         layout3.setHgap(5);
     }
@@ -520,7 +521,7 @@ public class MainGraphics extends Application {
             removeMessage.setText("Player removed: " + playerToBeRemoved);
             fantasyTeam.removePlayerFromTeam(playerToBeRemoved);
             setTeamInformation();
-            clearInput();
+            playerRemoved.clear();
         });
     }
 
@@ -531,7 +532,7 @@ public class MainGraphics extends Application {
         layout4.getChildren().add(removeClearButton);
 
         removeClearButton.setOnAction(event -> {
-            clearInput();
+            playerRemoved.clear();
         });
     }
 
@@ -557,6 +558,7 @@ public class MainGraphics extends Application {
     private void setPrintTeam() {
         printTeam = new Label();
         printTeam.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 24));
+        printTeam.setWrapText(true);
         printTeam.setMinWidth(Region.USE_PREF_SIZE);
         printTeam.setMinHeight(Region.USE_PREF_SIZE);
         GridPane.setConstraints(printTeam, 0, 0);

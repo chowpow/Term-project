@@ -5,7 +5,6 @@ import observer.TeamObserver;
 
 import java.io.*;
 import java.util.Scanner;
-import java.util.Set;
 
 public class FantasyTeam implements Saveable, Loadable {
     private Scanner scanner;
@@ -18,7 +17,7 @@ public class FantasyTeam implements Saveable, Loadable {
 
     }
 
-    public void runFantasyTeam() throws IOException, ClassNotFoundException {
+    protected void runFantasyTeam() throws IOException, ClassNotFoundException {
         processFantasyTeam();
     }
 
@@ -160,7 +159,7 @@ public class FantasyTeam implements Saveable, Loadable {
         return fantasyTeam;
     }
 
-    public void setFantasyTeam(Team fantasyTeam) {
+    protected void setFantasyTeam(Team fantasyTeam) {
         this.fantasyTeam = fantasyTeam;
     }
 

@@ -64,8 +64,8 @@ class PlayerTest {
 
     @Test
     void testEquals() {
-        assertTrue(player1.equals(new Forward("Mo Salah", "forward",2,2)));
-        assertTrue(player1.equals(player1));
-        assertFalse(player1.equals(null));
+        assertEquals(player1, new Forward("Mo Salah", "forward", 2, 2));
+        assertEquals(player1, player1);
+        assertNotEquals(null, player1);
     }
 }
